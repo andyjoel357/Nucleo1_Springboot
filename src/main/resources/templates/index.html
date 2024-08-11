@@ -1,1 +1,143 @@
- 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4; /* Light gray background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centered content within container */
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .btn-custom {
+            background-color: #ff69b4; /* Pink background */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin: 10px;
+            width: 150px; /* Adjusted button width */
+        }
+
+        .btn-custom:hover {
+            background-color: #ff33cc; /* Darker pink hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-custom i {
+            margin-right: 8px;
+        }
+        .card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Centered content within container */
+            margin-bottom: 20px;
+            width: 300px;
+            display: inline-block;
+        }
+        .card h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .card a {
+            display: block;
+            margin-top: 10px;
+        }
+        .card .btn-custom {
+            background-color: #ff69b4; /* Pink background */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin: 10px;
+            width: 100%; /* Adjusted button width */
+        }
+
+        .card .btn-custom:hover {
+            background-color: #ff33cc; /* Darker pink hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card .btn-custom i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 th:style="'font-family: Arial, sans-serif;'">Seleccione una opcion</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Estudiantes</h3>
+                <a href="Estudiantes.html" class="btn btn-custom">
+                   Ver Estudiantes
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Cursos</h3>
+                <a href="Cursos.html" class="btn btn-custom">
+                    Ver Cursos
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Profesores</h3>
+                <a href="Docentes.html" class="btn btn-custom">
+                    Ver Profesores
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Matriculas</h3>
+                <a href="Matriculas.html" class="btn btn-custom">
+                   Ver Matriculas
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <h3>Aulas</h3>
+                <a href="Aulas.html" class="btn btn-custom">
+                    Ver Aulas
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

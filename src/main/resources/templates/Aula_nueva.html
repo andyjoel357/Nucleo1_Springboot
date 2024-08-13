@@ -75,7 +75,7 @@
 <body>
 <div class="container mt-4">
     <h1 class="text-center mb-4" style="font-family: Algeria; font-weight: bold;">Crear Nueva Aula</h1>
-    <form action="#" th:action="@{/aulas}" th:object="${aulas}" method="post">
+    <form action="#" th:action="@{/courses}" th:object="${courses}" method="post">
         <div class="form-group">
             <label for="numero_aula">Número de Aula:</label>
             <input type="number" id="numero_aula" class="form-control" th:field="*{numero_aula}" required="required"/>
@@ -91,7 +91,7 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary" th:style="'font-family: Algeria;'">Guardar</button>
-        <a href="Aulas.html" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
+        <a href="/templates/Cursos.html" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
     </form>
 </div>
 </body>

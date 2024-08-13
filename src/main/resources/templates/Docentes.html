@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Aulas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Table styles */
+        .table {
+            background-color: #fff;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .table th, .table td {
+            padding: 15px;
+            border: none;
+            text-align: center;
+        }
+        .table th {
+            background-color: #2196F3; /* Primary blue color */
+            color: #fff;
+        }
+        .table tr:nth-child(even) {
+            background-color: #f7f7f7;
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background-color: #2196F3; /* Primary blue color */
+            border-color: #2196F3;
+        }
+        .btn-secondary {
+            background-color: #9C27B0; /* Secondary purple color */
+            border-color: #9C27B0;
+        }
+        .btn-warning {
+            background-color: #FFC107; /* Warning orange color */
+            border-color: #FFC107;
+        }
+        .btn-danger {
+            background-color: #FF3737; /* Danger red color */
+            border-color: #FF3737;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-center" style="font-weight: bold; color: #333;">Listado de Docentes</h1>
+    <div class="d-flex justify-content-between mb-3">
+        <a href="Docente_nuevo.html" class="btn btn-primary">Agregar Docente</a>
+        <a href="index.html" class="btn btn-secondary">Regresar Al inicio</a>
+    </div>
+    <table class="table table-sm">
+        <thead>
+        <tr style="font-weight: bold; text-align: center;">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Especializacion</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="aula : ${aulas}" style="text-align: center;">
+            <td th:text="${teacher.teacher_id}"></td>
+            <td th:text="${teacher.first_name}"></td>
+            <td th:text="${teacher.last_name}"></td>
+            <td th:text="${teacher.email}"></td>
+            <td th:text="${teacher.specialization}"></td>
+            <td>
+                <a th:href="@{/teacher/editar/{id}(id=${teacher.teacher_id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/teacher/eliminar/{id}(id=${teacher.teacher_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

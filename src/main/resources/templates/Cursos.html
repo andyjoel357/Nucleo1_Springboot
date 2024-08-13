@@ -56,8 +56,8 @@
 <div class="container mt-4">
     <h1 class="text-center" style="font-weight: bold; color: #333;">Lista de Cursos</h1>
     <div class="d-flex justify-content-between mb-3">
-        <a th:href="@{/cursos/nuevo}" class="btn btn-primary">Agregar Nuevo Curso</a>
-        <a href="index.html" class="btn btn-secondary">Regresar</a>
+        <a th:href="@{/courses/new}" class="btn btn-primary">Agregar Nuevo Curso</a>
+        <a th:href="@{/}" class="btn btn-secondary">Regresar</a>
     </div>
     <table class="table table-sm">
         <thead>
@@ -70,14 +70,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="curso : ${cursos}" style="text-align: center;">
-            <td th:text="${curso.cursos_id}"></td>
-            <td th:text="${curso.nombre}"></td>
-            <td th:text="${curso.descripcion}"></td>
-            <td th:text="${curso.creditos}"></td>
+        <tr th:each="courses : ${courses}" style="text-align: center;">
+            <td th:text="${courses.courses_id}"></td>
+            <td th:text="${courses.course_name}"></td>
+            <td th:text="${courses.description}"></td>
+            <td th:text="${courses.credits}"></td>
             <td>
-                <a th:href="@{/cursos/editar/{id}(id=${curso.cursos_id})}" class="btn btn-warning btn-sm">Editar</a>
-                <a th:href="@{/cursos/eliminar/{id}(id=${curso.cursos_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                <a th:href="@{/courses/editar/{id}(id=${courses.courses_id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/courses/eliminar/{id}(id=${courses.courses_id})}" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
         </tr>
         </tbody>

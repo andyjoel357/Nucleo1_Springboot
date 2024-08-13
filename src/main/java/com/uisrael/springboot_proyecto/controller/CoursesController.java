@@ -3,51 +3,53 @@ package com.uisrael.springboot_proyecto.controller;
 import com.uisrael.springboot_proyecto.entities.Courses;
 import com.uisrael.springboot_proyecto.repositories.CoursesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
-@RestController
+@Controller
+@RequestMapping("/courses")
 public class CoursesController {
     @Autowired
     CoursesRepository coursesRepository;
 
-    ////Metodo Get
-    @GetMapping("/courses")
-    public List<Courses> courses(){return coursesRepository.findAll();}
-
-    ///Metodo Post
-    @PostMapping("/courses")
-    public Courses crear(@RequestBody Courses courses){ return coursesRepository.save(courses);}
-
-    ///Metodo Editar
-    @GetMapping("/courses/{id}")
-    public Optional<Courses> getCoursesById(@PathVariable Integer id){return coursesRepository.findById(id);}
-
-    ///Metodo Delete
-    @DeleteMapping("/courses/{id}")
-    public ResponseEntity<Boolean> eliminarCourses(@PathVariable int id){
-        Optional <Courses>courses = coursesRepository.findById(id);
-        coursesRepository.delete(courses.get());
-        return ResponseEntity.ok(true);
+    @GetMapping
+    public String courses(Model model) {
+        model.addAttribute("courses", coursesRepository.findAll());
+        return "courses"; // returns the courses.html template
     }
-    @PutMapping("/courses/{id}")
-    public ResponseEntity<Courses> actualizarCourse(@PathVariable int id, @RequestBody Courses courseData){
-        Optional<Courses> opcionalCourses = coursesRepository.findById(id);
 
-        if (opcionalCourses.isPresent()) {
-            Courses courses = opcionalCourses.get();
-            //actualizar
-            courses.setCourse_name(courseData.getCourse_name());
-            courses.setDescription(courseData.getDescription());
-            courses.setCredits(courseData.getCredits());
+    @GetMapping("/new")
+    public String newCourse(Model model) {
+        model.addAttribute("course", new Courses());
+        return "Aula_nueva"; // returns the Aula_nueva.html template
+    }
 
-            Courses courseGuardado = coursesRepository.save(courses);
-            return ResponseEntity.ok(courseGuardado);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping
+    public String crear(@ModelAttribute Courses course) {
+        coursesRepository.save(course);
+        return "redirect:/courses"; // redirects to the courses list
+    }
+
+    @GetMapping("/{id}")
+    public String getCoursesById(@PathVariable int id, Model model) {
+        model.addAttribute("course", coursesRepository.findById(id).orElseThrow());
+        return "editar"; // returns the editar.html template
+    }
+
+    @PutMapping("/{id}")
+    public String actualizarCourse(@PathVariable int id, @ModelAttribute Courses courseData) {
+        Courses course = coursesRepository.findById(id).orElseThrow();
+        course.setCourse_name(courseData.getCourse_name());
+        course.setDescription(courseData.getDescription());
+        course.setCredits(courseData.getCredits());
+        coursesRepository.save(course);
+        return "redirect:/courses"; // redirects to the courses list
+    }
+
+    @GetMapping("/delete/{id}")
+    public String eliminarCourses(@PathVariable int id) {
+        coursesRepository.deleteById(id);
+        return "redirect:/courses"; // redirects to the courses list
     }
 }

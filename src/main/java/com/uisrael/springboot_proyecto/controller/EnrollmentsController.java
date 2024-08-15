@@ -27,7 +27,7 @@ public class EnrollmentsController {
     public Optional<Enrollments> getEnrollmentById(@PathVariable Integer id){return enrollmentsRepository.findById(id);}
 
     ///Metodo Delete
-    @DeleteMapping("/tables/{id}")
+    @DeleteMapping("/enrollments/{id}")
     public ResponseEntity<Boolean> eliminarEnrollment(@PathVariable int id){
         Optional <Enrollments> enrollments = enrollmentsRepository.findById(id);
         enrollmentsRepository.delete(enrollments.get());

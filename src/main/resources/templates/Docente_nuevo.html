@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Docente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* Form styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #2196F3; /* Primary blue color */
+            border-color: #2196F3;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-secondary {
+            background-color: #9C27B0; /* Secondary purple color */
+            border-color: #9C27B0;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            opacity: 0.8;
+        }
+
+        /* Additional styles for modern form */
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-control:focus {
+            border-color: #aaa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary, .btn-secondary {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container mt-4">
+    <h1 class="text-center mb-4" style="font-family: Algeria; font-weight: bold;">Crear Nuevo Docente</h1>
+    <form action="#" th:action="@{/teachers}" th:object="${teacher}" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" class="form-control" th:field="*{first_name}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" class="form-control" th:field="*{last_name}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" th:field="*{email}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="especializacion">Especialización:</label>
+            <input type="text" id="especializacion" class="form-control" th:field="*{specialization}" required="required"/>
+        </div>
+        <button type="submit" class="btn btn-primary" th:style="'font-family: Algeria;'">Guardar</button>
+        <a href="Docentes.html" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
+    </form>
+</div>
+</body>
+</html>

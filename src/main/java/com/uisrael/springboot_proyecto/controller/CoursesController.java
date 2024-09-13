@@ -23,8 +23,9 @@ public class CoursesController {
 
     ///Metodo Post
     @PostMapping("/courses")
-    public Courses crear(@RequestBody Courses courses){ return coursesRepository.save(courses);}
-
+    public String createCourse(@ModelAttribute Courses course) {
+        return "redirect:Cursos.html"; // Redirect to the course list page
+    }
     ///Metodo Editar
     @GetMapping("/courses/{id}")
     public Optional<Courses> getCoursesById(@PathVariable Integer id){return coursesRepository.findById(id);}

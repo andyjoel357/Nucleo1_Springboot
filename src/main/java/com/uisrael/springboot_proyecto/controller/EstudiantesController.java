@@ -20,8 +20,10 @@ public class EstudiantesController {
 
     ///Metodo Post
     @PostMapping("/estudiantes")
-    public Estudiantes crear(@RequestBody Estudiantes estudiantes){ return estudiantesRepository.save(estudiantes);}
-
+    public ResponseEntity<Estudiantes> crear(@RequestBody Estudiantes estudiantes){
+        Estudiantes savedEstudiante = estudiantesRepository.save(estudiantes);
+        return ResponseEntity.ok(savedEstudiante);
+    }
     ///Metodo Editar
     @GetMapping("/estudiantes/{id}")
     public Optional<Estudiantes> getEstudiantesById(@PathVariable Integer id){return estudiantesRepository.findById(id);}
@@ -29,10 +31,11 @@ public class EstudiantesController {
     ///Metodo Delete
     @DeleteMapping("/estudiantes/{id}")
     public ResponseEntity<Boolean> eliminarEstudiante(@PathVariable int id){
-        Optional <Estudiantes> estudiantes = estudiantesRepository.findById(id);
-        estudiantesRepository.delete(estudiantes.get());
+        estudiantesRepository.findById(id).ifPresent(estudiantesRepository::delete);
         return ResponseEntity.ok(true);
     }
+
+    ///Put Method
     @PutMapping("/estudiantes/{id}")
     public ResponseEntity<Estudiantes> actualizarEstudiante(@PathVariable int id, @RequestBody Estudiantes estudianteData){
         Optional<Estudiantes> opcionalEstudiante = estudiantesRepository.findById(id);

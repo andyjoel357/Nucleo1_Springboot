@@ -44,7 +44,7 @@ public class ClassroomsController {
             //actualizar
             classrooms.setRoom_number(classroomData.getRoom_number());
             classrooms.setCapacity(classroomData.getCapacity());
-            classrooms.setCourse_id(classroomData.getCourse_id());
+            classrooms.setCourse(classroomData.getCourse());
 
             Classrooms classroomGuardado = classroomsRepository.save(classrooms);
             return ResponseEntity.ok(classroomGuardado);

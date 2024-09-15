@@ -42,7 +42,7 @@ public class EnrollmentsController {
             Enrollments enrollment = opcionalEnrollment.get();
             //actualizar
             enrollment.setStudent_id(enrollmentData.getStudent_id());
-            enrollment.setCourse_id(enrollmentData.getCourse_id());
+            enrollment.setCourse(enrollmentData.getCourse());
             enrollment.setEnrollment_date(enrollmentData.getEnrollment_date());
 
             Enrollments enrollmentGuardado = enrollmentsRepository.save(enrollment);

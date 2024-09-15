@@ -5,18 +5,28 @@ import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.time.LocalDate;
 
-    @Table(name = "tbl_estudiantes")
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class Estudiantes {
-        @Id
-        @GeneratedValue( strategy = GenerationType.AUTO)
-        private long student_id;
-        private String first_name;
-        private String last_name;
-        private String date_of_birth;
-        private String email;
+@Entity
+@Table(name = "tbl_estudiantes")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Estudiantes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Student_id")
+    private Long Student_id;
+
+    @Column(name = "first_name")
+    private String first_name;
+
+    @Column(name = "last_name")
+    private String last_name;
+
+    @Column(name = "date_of_birth")
+    private LocalDate date_of_birth;
+
+    @Column(name = "email")
+    private String email;
 }

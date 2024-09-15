@@ -4,20 +4,24 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Entity
-
 @Table(name = "tbl_classrooms")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Classrooms {
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
-    private long classrooms_id;
-    private String room_number;
-    private int capacity;
-    @JoinColumn(name = "course_id", referencedColumnName = "course_id")
-    private String course_id;
-}
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "classrooms_id")
+    private Long classrooms_id;
 
+    @Column(name = "room_number")
+    private String room_number;
+
+    @Column(name = "capacity")
+    private int capacity;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id", referencedColumnName = "Course_id", columnDefinition = "BIGINT")
+    private Courses course;
+}

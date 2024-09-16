@@ -1,58 +1,71 @@
 package com.uisrael.springboot_proyecto.controller;
 
 import com.uisrael.springboot_proyecto.entities.Courses;
-import com.uisrael.springboot_proyecto.entities.Enrollments;
-import com.uisrael.springboot_proyecto.entities.Estudiantes;
 import com.uisrael.springboot_proyecto.repositories.CoursesRepository;
-import com.uisrael.springboot_proyecto.repositories.EnrollmentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
+@RequestMapping("/courses")
 public class CoursesController {
     @Autowired
     CoursesRepository coursesRepository;
 
-    ////Metodo Get
-    @GetMapping("/courses")
-    public List<Courses> courses(){return coursesRepository.findAll();}
+    //// Método Get - Listar cursos
+    @GetMapping
+    public String listCourses(Model model) {
+        List<Courses> courses = coursesRepository.findAll();
+        model.addAttribute("courses", courses);
+        return "courses";  // Página HTML para listar cursos (en la raíz de templates)
+    }
 
-    ///Metodo Post
+    //// Método Get - Mostrar formulario para agregar curso nuevo
+    @GetMapping("/nuevo")
+    public String showNewForm(Model model) {
+        model.addAttribute("courses", new Courses());
+        return "courses_nuevo";  // Página HTML para nuevo curso (en la raíz de templates)
+    }
+
+    //// Método Post - Guardar curso nuevo
     @PostMapping("/courses")
-    public String createCourse(@ModelAttribute Courses course) {
-        return "redirect:Cursos.html"; // Redirect to the course list page
+    public String createCourse(@ModelAttribute Courses course, Model model) {
+        coursesRepository.save(course);
+        return "redirect:/courses";  // Redirigir a la lista de cursos
     }
-    ///Metodo Editar
-    @GetMapping("/courses/{id}")
-    public Optional<Courses> getCoursesById(@PathVariable Integer id){return coursesRepository.findById(id);}
 
-    ///Metodo Delete
-    @DeleteMapping("/courses/{id}")
-    public ResponseEntity<Boolean> eliminarCourses(@PathVariable int id){
-        Optional <Courses> courses = coursesRepository.findById(id);
-        coursesRepository.delete(courses.get());
-        return ResponseEntity.ok(true);
+    //// Método Get - Mostrar formulario para editar curso
+    @GetMapping("/editar/{id}")
+    public String showEditForm(@PathVariable int id, Model model) {
+        Optional<Courses> courseExistente = coursesRepository.findById(id);
+        if (courseExistente.isPresent()) {
+            model.addAttribute("courses", courseExistente.get());
+        } else{}
+        return "course_editar";  // Página HTML para editar curso (en la raíz de templates)
     }
-    ///Methodo PUT
-    @PutMapping("/courses/{id}")
-    public ResponseEntity<Courses> actualizarCourses(@PathVariable int id, @RequestBody Courses coursesData){
-        Optional<Courses> opcionalCourses = coursesRepository.findById(id);
 
-        if (opcionalCourses.isPresent()) {
-            Courses courses = opcionalCourses.get();
-            //actualizar
-            courses.setCourse_name(coursesData.getCourse_name());
-            courses.setDescription(coursesData.getDescription());
-            courses.setCredits(coursesData.getCredits());
-
-            Courses coursesGuardado = coursesRepository.save(courses);
-            return ResponseEntity.ok(coursesGuardado);
-        } else {
-            return ResponseEntity.notFound().build();
+    //// Método Post - Actualizar curso
+    @PutMapping("/editar/{id}")
+    public String updateCourse(@PathVariable int id, @ModelAttribute Courses course, Model model) {
+        Optional<Courses> courseExistente = coursesRepository.findById(id);
+        if (courseExistente.isPresent()) {
+            Courses curso = courseExistente.get();
+            curso.setCourse_name(course.getCourse_name());
+            curso.setDescription(course.getDescription());
+            curso.setCredits(course.getCredits());
+            coursesRepository.save(curso);
         }
+        return "redirect:/courses";  // Redirigir a la lista de cursos después de la edición
+    }
+
+// Método Delete - Eliminar curso
+    @DeleteMapping("/{id}")
+    public String deleteCourse(@PathVariable Integer id) {
+        coursesRepository.deleteById(id);
+        return "redirect:/courses";  // Redirigir a la lista después de eliminar
     }
 }

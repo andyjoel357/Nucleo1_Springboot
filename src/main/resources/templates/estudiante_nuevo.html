@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Aula</title>
+    <title>Crear estudiantes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -74,24 +74,27 @@
 
 <body>
 <div class="container mt-4">
-    <h1 class="text-center mb-4" style="font-family: Algeria; font-weight: bold;">Crear Nueva Aula</h1>
-    <form action="#" th:action="@{/courses}" th:object="${courses}" method="post">
-        <div class="form-group">
-            <label for="numero_aula">Número de Aula:</label>
-            <input type="number" id="numero_aula" class="form-control" th:field="*{numero_aula}" required="required"/>
+    <h1 class="text-center mb-4" style="font-family: Algeria; font-weight: bold;">Ingresar nuevo estudiante</h1>
+    <form th:action="@{/estudiantes}" th:object="${estudiantes}" method="post">
+    <div class="form-group">
+            <label for="first_name">Nombre:</label>
+            <input type="text" id="first_name" class="form-control" th:field="*{first_name}" required="required"/>
         </div>
         <div class="form-group">
-            <label for="capacidad">Capacidad:</label>
-            <input type="number" id="capacidad" class="form-control" th:field="*{capacidad}" required="required"/>
+            <label for="last_name">Apellido:</label>
+            <input type="text" id="last_name" class="form-control" th:field="*{last_name}" required="required"/>
         </div>
         <div class="form-group">
-            <label for="cursos">Curso:</label>
-            <select id="cursos" class="form-control" th:field="*{cursos}">
-                <option th:each="curso : ${cursos}" th:value="${curso.cursos_id}" th:text="${curso.nombre}"></option>
-            </select>
+            <label for="date_of_birth">Fecha de Nacimiento:</label>
+            <input type="date" id="date_of_birth" class="form-control" th:field="*{date_of_birth}" required="required"/>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" class="form-control" th:field="*{email}" required="required"/>
         </div>
         <button type="submit" class="btn btn-primary" th:style="'font-family: Algeria;'">Guardar</button>
-        <a href="Aulas.html" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
+        <a th:href="@{/estudiantes}" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
+
     </form>
 </div>
 </body>

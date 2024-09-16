@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Crear estudiantes</title>
+    <title>Editar estudiantes</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -74,8 +74,9 @@
 
 <body>
 <div class="container mt-4">
-    <h1 class="text-center mb-4" style="font-family: Algeria; font-weight: bold;">Ingresar nuevo estudiante</h1>
-    <form th:action="@{/estudiantes}" th:object="${estudiantes}" method="post">
+    <h1 class="text-center mb-4" style="font-family: Algeria; font-weight: bold;">Editar estudiante</h1>
+    <form th:action="@{/estudiantes/editar/{id}(id=${estudiantes.Student_id})}" th:object="${estudiantes}" method="post">
+        <!-- Campos del formulario -->
         <div class="form-group">
             <label for="first_name">Nombre:</label>
             <input type="text" id="first_name" class="form-control" th:field="*{first_name}" required="required"/>
@@ -92,8 +93,8 @@
             <label for="email">Email:</label>
             <input type="email" id="email" class="form-control" th:field="*{email}" required="required"/>
         </div>
-        <button type="submit" class="btn btn-primary" th:style="'font-family: Algeria;'">Guardar</button>
-        <a href="Estudiantes.html" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
+        <button type="submit" class="btn btn-primary">Editar</button>
+        <a th:href="@{/estudiantes}" class="btn btn-secondary">Volver a la lista</a>
     </form>
 </div>
 </body>

@@ -74,8 +74,8 @@
 <body>
 <div class="container mt-4">
     <h1 class="text-center mb-4" style="font-family: Algeria; font-weight: bold;">Crear un Curso nuevo</h1>
-    <form action="Cursos.html" th:action="@{/courses}" th:object="${courses}" method="post">
-    <div class="form-group">
+    <form th:action="@{/courses}" th:object="${courses}" method="post">
+        <div class="form-group">
             <label for="nombre">Nombre del Curso:</label>
             <input type="text" id="nombre" class="form-control" th:field="*{course_name}" required="required"/>
         </div>
@@ -88,7 +88,7 @@
             <input type="number" id="creditos" class="form-control" th:field="*{credits}" required="required"/>
         </div>
         <button type="submit" class="btn btn-primary" th:style="'font-family: Algeria;'">Guardar</button>
-        <a href="Cursos.html" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
+        <a th:href="@{/courses}" class="btn btn-secondary" th:style="'font-family: Algeria;'">Volver a la lista</a>
     </form>
 </div>
 </body>

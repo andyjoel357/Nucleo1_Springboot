@@ -66,29 +66,33 @@
 <div class="container mt-4">
     <h1 class="text-center" style="font-weight: bold; color: #333;">Lista de Aulas</h1>
     <div class="d-flex justify-content-between mb-3">
-        <a href="Aula_nueva.html" class="btn btn-primary">Crear Nueva Aula</a>
-        <a href="index.html" class="btn btn-secondary">Regresar</a>
+        <a th:href="@{/courses/nuevo}" class="btn btn-primary">Crear Nueva Aula</a>
+        <a href="../" class="btn btn-secondary">Regresar</a>
     </div>
     <div class="form-container">
         <table class="table table-sm">
             <thead>
             <tr style="font-weight: bold; text-align: center;">
                 <th>ID</th>
-                <th>Número de Aula</th>
-                <th>Capacidad</th>
-                <th>Curso</th>
+                <th>Nombre del Curso</th>
+                <th>Descripcion</th>
+                <th>Creditos</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="aula : ${aulas}" style="text-align: center;">
-                <td th:text="${aula.aulas_id}"></td>
-                <td th:text="${aula.numero_aula}"></td>
-                <td th:text="${aula.capacidad}"></td>
-                <td th:text="${aula.cursos.nombre}"></td>
+            <tr th:each="aula : ${courses}" style="text-align: center;">
+                <td th:text="${aula.Course_id}"></td>
+                <td th:text="${aula.course_name}"></td>
+                <td th:text="${aula.description}"></td>
+                <td th:text="${aula.credits}"></td>
                 <td>
-                    <a th:href="@{/aulas/editar/{id}(id=${aula.aulas_id})}" class="btn btn-warning btn-sm">Editar</a>
-                    <a th:href="@{/aulas/eliminar/{id}(id=${aula.aulas_id})}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a th:href="@{/courses/editar/{id}(id=${courses.Course_id})}" class="btn btn-warning btn-sm">Editar</a>
+                    <form th:action="@{/courses/{id}(id=${courses.Course_id})}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+
                 </td>
             </tr>
             </tbody>
